@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>{{ title }}</title>
+	<style>
+		.grid-container {
+			display: grid;
+			grid-template-columns: auto auto auto;
+			padding: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>{{ title }}</h1>
+	<hr>
+	<div class="grid-container">
+
+
+		<div><a href=/{{ parent }}>../</a></div>
+		<div></div>
+		<div></div>
+		{% for i in paths %}
+		{% if i.is_file %}
+		<div>{{ i.path }}</div>
+		<div><a href=/{{ i.href }} download>Download ({{i.size}})</a></div>
+		{% else %}
+		<div><a href=/{{ i.href }}>{{ i.path }}</a></div>
+		<div><a href=/zip/{{ i.href }}>Download zip</a></div>
+		{% endif %}
+		<div> {{ i.mtime }} </div>
+		{% endfor %}
+	</div>
+
+
+	<hr>
+</body>
+
+</html>
