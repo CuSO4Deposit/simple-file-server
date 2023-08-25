@@ -51,7 +51,7 @@ def file(filename: str, request: Request):
             }
             for i in file_path.iterdir()
         ]
-        paths.sort(key=lambda x: x["mtime"])
+        paths.sort(key=lambda x: x["mtime"], reverse=True)
         for i in paths:
             i["mtime"] = strftime("%d %b %y %H:%M:%S UTC", gmtime(i["mtime"]))
         resp = {
@@ -59,6 +59,7 @@ def file(filename: str, request: Request):
             "title": str(file_path.relative_to(base_dir)),
             "paths": paths,
             "parent": file_path.relative_to(base_dir).parent,
+            "num_entries": len(paths),
         }
 
         return templates.TemplateResponse("template.html", resp)
