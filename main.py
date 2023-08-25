@@ -37,7 +37,7 @@ def zipHandler(filename: str):
 def file(filename: str, request: Request):
     file_path = base_dir / filename
     if not file_path.exists():
-        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={})
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"404": "Not Found"})
     if file_path.is_dir():
         paths = [
             {
